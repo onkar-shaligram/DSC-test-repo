@@ -1,10 +1,11 @@
 
+import 'package:dsc_local/screens/homeScreen/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'screens/eventDetails/eventDetails.dart';
-import 'screens/homeScreen/homePage.dart';
+import 'screens/homeScreen/UpcomingEventsPage.dart';
 import 'constants.dart';
 import 'screens/onBoardScreen/onBoardingPage.dart';
 
@@ -52,7 +53,7 @@ class DSC extends StatelessWidget {
                 settings: settings);
           case '/home':
             return PageRouteBuilder(
-                pageBuilder: (_, a1, a2) => HomePage(), settings: settings);
+                pageBuilder: (_, a1, a2) => Home(), settings: settings);
           case '/eventDetails':
             return PageRouteBuilder(
                 pageBuilder: (_, a1, a2) => EventDetails(), settings: settings);

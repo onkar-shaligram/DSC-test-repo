@@ -1,21 +1,19 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dsc_local/configs/assets.dart';
 import 'package:dsc_local/data/models/eventsModel.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttericon/font_awesome5_icons.dart';
 
-class HomePage extends StatefulWidget {
+class PastEventsPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _PastEventsPageState createState() => _PastEventsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _PastEventsPageState extends State<PastEventsPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   final ref = FirebaseFirestore.instance
-      .collection('upcoming events')
+      .collection('past events')
       .orderBy('priority', descending: false);
 
   @override
