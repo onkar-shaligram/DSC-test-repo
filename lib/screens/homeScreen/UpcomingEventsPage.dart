@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dsc_local/configs/assets.dart';
 import 'package:dsc_local/data/models/eventsModel.dart';
+import 'package:dsc_local/screens/eventDetails/eventDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 
@@ -60,8 +61,14 @@ class _UpcomingEventsPageState extends State<UpcomingEventsPage> {
                           ),
                           child: InkWell(
                             onTap: () {
-                              Navigator.pushNamed(context, "/eventDetails",
-                                  arguments: eventsTestData[index]);
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => EventDetails(
+                                description: snapshot.data.docs[index].data()['description'],
+                                eventLink: snapshot.data.docs[index].data()['urlToEvent'],
+                                eventName: snapshot.data.docs[index].data()['title'],
+                                time: snapshot.data.docs[index].data()['time'],
+                                formlink: snapshot.data.docs[index].data()['feedbackFormUrlLink'],
+                                formVisiblity: snapshot.data.docs[index].data()['FeedbackFormVisible'],
+                              )));
                             },
                             child: Column(
                               children: [

@@ -1,4 +1,3 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dsc_local/configs/assets.dart';
 import 'package:dsc_local/data/models/eventsModel.dart';
@@ -11,6 +10,15 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../constants.dart';
 
 class EventDetails extends StatefulWidget {
+  final String eventName, time, eventLink, description, formlink, formVisiblity;
+  EventDetails(
+      {this.eventName,
+      this.time,
+      this.eventLink,
+      this.description,
+      this.formlink,
+      this.formVisiblity});
+
   @override
   _EventDetailsState createState() => _EventDetailsState();
 }
@@ -56,7 +64,7 @@ class _EventDetailsState extends State<EventDetails> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AutoSizeText(
-                        eventTriggred.eventTitle,
+                        widget.eventName,
                         minFontSize: 12,
                         maxLines: 2,
                         style: TextStyle(
@@ -78,11 +86,7 @@ class _EventDetailsState extends State<EventDetails> {
                         ),
                       ),
                       AutoSizeText(
-                        eventTriggred.eventDay != null
-                            ? eventTriggred.eventDay +
-                                ", ${eventTriggred.eventDate}, ${eventTriggred.eventTime}"
-                            : "" +
-                                "${eventTriggred.eventDate}, ${eventTriggred.eventTime}",
+                        widget.time,
                         minFontSize: 10,
                         style: TextStyle(
                           color: Colors.white,
@@ -197,29 +201,42 @@ class _EventDetailsState extends State<EventDetails> {
                       ),
                       Row(
                         children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 10, left: 10),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 8,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              border: Border.all(width: 1, color: Colors.white),
-                            ),
-                            child: AutoSizeText(
-                              "#${eventTriggred.eventHashTag}",
-                              minFontSize: 10,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 8,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          ),
+                          widget.formVisiblity == "true"
+                              ? GestureDetector(
+                                  onTap: () async {
+                                    String url = widget.formlink;
+                                    if (await canLaunch(url)) {
+                                      await launch(url);
+                                    } else {
+                                      throw 'Could not launch $url';
+                                    }
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.only(top: 10, left: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 8,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
+                                          width: 1, color: Colors.white),
+                                    ),
+                                    child: AutoSizeText(
+                                      "Give Feedback",
+                                      minFontSize: 10,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : Container(),
                           GestureDetector(
                             onTap: () async {
-                              String url = eventTriggred.eventURL;
+                              String url = widget.eventLink;
                               if (await canLaunch(url)) {
                                 await launch(url);
                               } else {
@@ -259,7 +276,8 @@ class _EventDetailsState extends State<EventDetails> {
                 child: Container(
                   margin: EdgeInsets.only(top: 12),
                   child: AutoSizeText(
-                    slideIndex == 0 ? "About this event" : "Web Timeline",
+                    //slideIndex == 0 ? "About this event" : "Web Timeline",
+                    "About this Event",
                     minFontSize: 12,
                     style: TextStyle(
                       color: Colors.grey.shade800,
@@ -283,7 +301,7 @@ class _EventDetailsState extends State<EventDetails> {
                       child: Container(
                         margin: EdgeInsets.symmetric(horizontal: 16),
                         child: AutoSizeText(
-                          eventTriggred.eventDesc,
+                          widget.description,
                           minFontSize: 12,
                           textAlign: TextAlign.justify,
                           style: TextStyle(
@@ -294,96 +312,96 @@ class _EventDetailsState extends State<EventDetails> {
                         ),
                       ),
                     ),
-                    eventTriggred.secondPagePoints != null
-                        ? Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 16),
-                                child: AutoSizeText(
-                                  eventTriggred.secondPageSubHeading,
-                                  minFontSize: 12,
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    color: Colors.grey.shade800,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Scrollbar(
-                                  radius: Radius.circular(20),
-                                  thickness: 4,
-                                  child: ListView.builder(
-                                    itemCount:
-                                        eventTriggred.secondPagePoints.length,
-                                    itemBuilder: (context, index) {
-                                      return Container(
-                                        margin: EdgeInsets.all(8),
-                                        padding: EdgeInsets.only(left: 10),
-                                        child: AutoSizeText(
-                                          eventTriggred.secondPagePoints[index],
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        : Container(
-                            child: Center(
-                              child: Text(
-                                "No data avilable😖\nplease contact the admistrator",
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                    eventTriggred.thirdPagePoints != null
-                        ? Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 16),
-                                child: AutoSizeText(
-                                  eventTriggred.thirdPageSubHeading,
-                                  minFontSize: 12,
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    color: Colors.grey.shade800,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Scrollbar(
-                                  radius: Radius.circular(20),
-                                  thickness: 4,
-                                  child: ListView.builder(
-                                    itemCount:
-                                        eventTriggred.secondPagePoints.length,
-                                    itemBuilder: (context, index) {
-                                      return Container(
-                                        margin: EdgeInsets.all(8),
-                                        padding: EdgeInsets.only(left: 10),
-                                        child: AutoSizeText(
-                                          eventTriggred.secondPagePoints[index],
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        : Container(
-                            child: Center(
-                              child: Text(
-                                "No data avilable😖\nplease contact the admistrator",
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
+                    // eventTriggred.secondPagePoints == null
+                    //     ? Column(
+                    //         children: [
+                    //           Container(
+                    //             margin: EdgeInsets.symmetric(horizontal: 16),
+                    //             child: AutoSizeText(
+                    //               eventTriggred.secondPageSubHeading,
+                    //               minFontSize: 12,
+                    //               textAlign: TextAlign.justify,
+                    //               style: TextStyle(
+                    //                 color: Colors.grey.shade800,
+                    //                 fontSize: 16,
+                    //                 fontWeight: FontWeight.w600,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           Expanded(
+                    //             child: Scrollbar(
+                    //               radius: Radius.circular(20),
+                    //               thickness: 4,
+                    //               child: ListView.builder(
+                    //                 itemCount:
+                    //                     eventTriggred.secondPagePoints.length,
+                    //                 itemBuilder: (context, index) {
+                    //                   return Container(
+                    //                     margin: EdgeInsets.all(8),
+                    //                     padding: EdgeInsets.only(left: 10),
+                    //                     child: AutoSizeText(
+                    //                       eventTriggred.secondPagePoints[index],
+                    //                     ),
+                    //                   );
+                    //                 },
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       )
+                    //     : Container(
+                    //         child: Center(
+                    //           child: Text(
+                    //             "No data avilable😖\nplease contact the admistrator",
+                    //             textAlign: TextAlign.center,
+                    //           ),
+                    //         ),
+                    //       ),
+                    // eventTriggred.thirdPagePoints != null
+                    //     ? Column(
+                    //         children: [
+                    //           Container(
+                    //             margin: EdgeInsets.symmetric(horizontal: 16),
+                    //             child: AutoSizeText(
+                    //               eventTriggred.thirdPageSubHeading,
+                    //               minFontSize: 12,
+                    //               textAlign: TextAlign.justify,
+                    //               style: TextStyle(
+                    //                 color: Colors.grey.shade800,
+                    //                 fontSize: 16,
+                    //                 fontWeight: FontWeight.w600,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           Expanded(
+                    //             child: Scrollbar(
+                    //               radius: Radius.circular(20),
+                    //               thickness: 4,
+                    //               child: ListView.builder(
+                    //                 itemCount:
+                    //                     eventTriggred.secondPagePoints.length,
+                    //                 itemBuilder: (context, index) {
+                    //                   return Container(
+                    //                     margin: EdgeInsets.all(8),
+                    //                     padding: EdgeInsets.only(left: 10),
+                    //                     child: AutoSizeText(
+                    //                       eventTriggred.secondPagePoints[index],
+                    //                     ),
+                    //                   );
+                    //                 },
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       )
+                    //     : Container(
+                    //         child: Center(
+                    //           child: Text(
+                    //             "No data avilable😖\nplease contact the admistrator",
+                    //             textAlign: TextAlign.center,
+                    //           ),
+                    //         ),
+                    //       ),
                   ],
                 ),
               ),
