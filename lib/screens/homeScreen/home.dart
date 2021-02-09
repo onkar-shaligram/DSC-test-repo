@@ -1,5 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:dsc_local/screens/dscScreen/aboutDSC.dart';
+import 'package:dsc_local/screens/dscScreen/requestEvent.dart';
+import 'package:dsc_local/screens/dscScreen/team.dart';
 import 'package:dsc_local/screens/homeScreen/PastEventsPage.dart';
 import 'package:dsc_local/screens/homeScreen/UpcomingEventsPage.dart';
 import 'package:flutter/material.dart';
@@ -93,13 +95,13 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                               ListTile(
                                 title: Text("Team Members", style: TextStyle(color: Colors.black)),
                                 onTap: () {
-                                  
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Team()));                                  
                                 },
                               ),
                               ListTile(
                                 title: Text("Request an Event", style: TextStyle(color: Colors.black)),
                                 onTap: () {
-                                  
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => RequestEventForm()));                                  
                                 },
                               )
                             ],
