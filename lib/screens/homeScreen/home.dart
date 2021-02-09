@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:dsc_local/screens/dscScreen/aboutDSC.dart';
 import 'package:dsc_local/screens/homeScreen/PastEventsPage.dart';
 import 'package:dsc_local/screens/homeScreen/UpcomingEventsPage.dart';
 import 'package:flutter/material.dart';
@@ -9,61 +10,120 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-        int _selectedIndex = 0;  
-    final tabs = [
-      UpcomingEventsPage(),
-      
-      PastEventsPage()
-    ];
+  int sindex = 0;
+  int _selectedIndex = 0;
+  final tabs = [
+    UpcomingEventsPage(),
+    PastEventsPage(),
+  ];
 
-   void _onItemTapped(int index) {
+  void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;  
-    }); 
+      _selectedIndex = index;
+    });
   }
-    
+
   @override
   Widget build(BuildContext context) {
-  return Scaffold(
-    // bottomNavigationBar: BottomNavigationBar(
-    //     onTap: (index) {
-    //       _onItemTapped(index);
-    //     },
-    //     items: [
-    //       BottomNavigationBarItem(
-    //         backgroundColor: Colors.black,
-    //         icon: Icon(Icons.electrical_services),
-    //         label: "Upcoming Events"
-    //         ),
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+          onTap: (index) {
+            _onItemTapped(index);
+          },
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home, color: Colors.black),
+                label: "Upcoming Events"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.power, color: Colors.black),
+                label: "Past Events"),
+          ],
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.grey,
+          currentIndex: _selectedIndex,
+          elevation: 5),
 
-    //       BottomNavigationBarItem(
-    //         icon: Icon(Icons.electric_car),
-    //         label: "Past Events"
-    //         ),
-    //     ],
-    //     type: BottomNavigationBarType.shifting,  
-    //     currentIndex: _selectedIndex,   
-    //     elevation: 5  
-    //     ),
 
-    bottomNavigationBar: CurvedNavigationBar(
-      color: Colors.blue,
-      backgroundColor: Colors.white,
-      items: [
-        Icon(Icons.list, size: 30),
-        ImageIcon(
-          AssetImage("assets/images/main_logo.png"), size: 30, color: Colors.white,
-          ),
-        Icon(Icons.compare_arrows, size: 30),
-      ],
-      onTap: (index) {
-        _onItemTapped(index);
-      },
-  ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: MyFloatingActionButton(),
+
       body: Center(
-        child: tabs.elementAt(_selectedIndex), 
+        child: tabs.elementAt(_selectedIndex),
       ),
+    );
+  }
+}
 
-      );
+class MyFloatingActionButton extends StatefulWidget {
+  @override
+  _MyFloatingActionButtonState createState() => _MyFloatingActionButtonState();
+}
+
+class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
+  bool showFab = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return showFab
+        ? FloatingActionButton(
+            backgroundColor: Colors.white70,
+            onPressed: () {
+              var bottomSheetController = showBottomSheet(
+                backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (context) => ClipRRect(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(50),
+                            topRight: Radius.circular(50)),
+                        child: Container(
+                          color: Colors.white,
+                          height: MediaQuery.of(context).size.height-300,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+
+                              SizedBox(height: 20,),
+                              ListTile(
+                                title: Text("About DSC", style: TextStyle(color: Colors.black),),
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => AboutDSC()));
+                                },
+                              ),
+                              ListTile(
+                                title: Text("Team Members", style: TextStyle(color: Colors.black)),
+                                onTap: () {
+                                  
+                                },
+                              ),
+                              ListTile(
+                                title: Text("Request an Event", style: TextStyle(color: Colors.black)),
+                                onTap: () {
+                                  
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                      ));
+
+              showFoatingActionButton(true);
+
+              bottomSheetController.closed.then((value) {
+                showFoatingActionButton(true);
+              });
+            },
+            child: Image.asset(
+              "assets/images/main_logo.png",
+              height: 20,
+            ),
+          )
+        : Container();
+  }
+
+  void showFoatingActionButton(bool value) {
+    setState(() {
+      showFab = value;
+    });
   }
 }

@@ -37,6 +37,7 @@ dependencies:
   cloud_firestore: any
   firebase_core: any
   curved_navigation_bar: any
+  ss_bottom_navbar: any
 
 dev_dependencies:
   flutter_test:
