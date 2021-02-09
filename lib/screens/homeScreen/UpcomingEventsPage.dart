@@ -68,6 +68,7 @@ class _UpcomingEventsPageState extends State<UpcomingEventsPage> {
                                 time: snapshot.data.docs[index].data()['time'],
                                 formlink: snapshot.data.docs[index].data()['feedbackFormUrlLink'],
                                 formVisiblity: snapshot.data.docs[index].data()['FeedbackFormVisible'],
+                                imageUrl: snapshot.data.docs[index].data()['imageUrl'],
                               )));
                             },
                             child: Column(

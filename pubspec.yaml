@@ -36,6 +36,7 @@ dependencies:
   url_launcher: ^5.7.10
   cloud_firestore: any
   firebase_core: any
+  curved_navigation_bar: any
 
 dev_dependencies:
   flutter_test:

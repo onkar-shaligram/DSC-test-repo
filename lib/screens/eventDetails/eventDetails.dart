@@ -10,14 +10,15 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../constants.dart';
 
 class EventDetails extends StatefulWidget {
-  final String eventName, time, eventLink, description, formlink, formVisiblity;
+  final String eventName, time, eventLink, description, formlink, formVisiblity, imageUrl;
   EventDetails(
       {this.eventName,
       this.time,
       this.eventLink,
       this.description,
       this.formlink,
-      this.formVisiblity});
+      this.formVisiblity,
+      this.imageUrl});
 
   @override
   _EventDetailsState createState() => _EventDetailsState();
@@ -51,7 +52,7 @@ class _EventDetailsState extends State<EventDetails> {
               Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(Assets.containerBackgroundImg),
+                    image: NetworkImage(widget.imageUrl),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -405,23 +406,23 @@ class _EventDetailsState extends State<EventDetails> {
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  for (int i = 0; i < 3; i++)
-                    i == slideIndex
-                        ? buildPageIndicator(
-                            true,
-                            Constants.googleLogoColorsList[
-                                Constants.googleLogoColorsList.length - i - 1],
-                          )
-                        : buildPageIndicator(
-                            false,
-                            Constants.googleLogoColorsList[
-                                Constants.googleLogoColorsList.length - i - 1],
-                          ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     for (int i = 0; i < 3; i++)
+              //       i == slideIndex
+              //           ? buildPageIndicator(
+              //               true,
+              //               Constants.googleLogoColorsList[
+              //                   Constants.googleLogoColorsList.length - i - 1],
+              //             )
+              //           : buildPageIndicator(
+              //               false,
+              //               Constants.googleLogoColorsList[
+              //                   Constants.googleLogoColorsList.length - i - 1],
+              //             ),
+              //   ],
+              // ),
             ],
           ),
         ),
