@@ -4,18 +4,21 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/eventDetails/eventDetails.dart';
 import 'screens/homeScreen/UpcomingEventsPage.dart';
 import 'constants.dart';
 import 'screens/onBoardScreen/onBoardingPage.dart';
 
-// void main() => runApp(
-//       DSC(),
-//     );
+int initScreen;
 
-void main() async {
+Future <void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  initScreen = await prefs.getInt("initScreen");
+  await prefs.setInt("initScreen", 1);
+  print('initScreen ${initScreen}');
   runApp(DSC());
 }
 
@@ -44,7 +47,7 @@ class DSC extends StatelessWidget {
             bodyText2:
                 GoogleFonts.quicksand(textStyle: TextStyle(fontSize: 14.0))),
       ),
-      initialRoute: '/',
+      initialRoute: initScreen == 0 || initScreen == null ? '/' : '/home',
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
           case '/':
