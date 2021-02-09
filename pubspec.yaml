@@ -33,7 +33,7 @@ dependencies:
   flutter_svg: ^0.19.1
   google_fonts: ^1.1.1
   fluttericon: ^1.0.7
-  url_launcher: ^5.7.10
+  url_launcher: any
   cloud_firestore: any
   firebase_core: any
   curved_navigation_bar: any

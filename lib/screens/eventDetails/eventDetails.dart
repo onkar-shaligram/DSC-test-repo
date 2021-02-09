@@ -1,13 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dsc_local/configs/assets.dart';
 import 'package:dsc_local/data/models/eventsModel.dart';
-import 'package:dsc_local/widgets/pageIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome_icons.dart';
-
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../constants.dart';
 
 class EventDetails extends StatefulWidget {
   final String eventName, time, eventLink, description, formlink, formVisiblity, imageUrl;
@@ -205,7 +201,7 @@ class _EventDetailsState extends State<EventDetails> {
                           widget.formVisiblity == "true"
                               ? GestureDetector(
                                   onTap: () async {
-                                    String url = widget.formlink;
+                                    String url = widget.formlink.toString();
                                     if (await canLaunch(url)) {
                                       await launch(url);
                                     } else {
@@ -237,7 +233,7 @@ class _EventDetailsState extends State<EventDetails> {
                               : Container(),
                           GestureDetector(
                             onTap: () async {
-                              String url = widget.eventLink;
+                              String url = widget.eventLink.toString();
                               if (await canLaunch(url)) {
                                 await launch(url);
                               } else {
