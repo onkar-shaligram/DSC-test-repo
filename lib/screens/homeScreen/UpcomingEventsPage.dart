@@ -78,7 +78,7 @@ class _UpcomingEventsPageState extends State<UpcomingEventsPage> {
                                       left: 16, right: 16, top: 24),
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.stretch,
                                     children: [
                                       AutoSizeText(
                                         snapshot.data.docs[index]

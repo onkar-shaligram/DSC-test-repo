@@ -69,11 +69,12 @@ class _PastEventsPageState extends State<PastEventsPage> {
                             child: Column(
                               children: [
                                 Container(
+
                                   padding: EdgeInsets.only(
                                       left: 16, right: 16, top: 24),
                                   child: Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.stretch,
                                     children: [
                                       AutoSizeText(
                                         snapshot.data.docs[index]

@@ -1,4 +1,3 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:dsc_local/screens/dscScreen/aboutDSC.dart';
 import 'package:dsc_local/screens/dscScreen/requestEvent.dart';
 import 'package:dsc_local/screens/dscScreen/team.dart';
@@ -43,6 +42,7 @@ class _HomeState extends State<Home> {
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.black,
           unselectedItemColor: Colors.grey,
+          showUnselectedLabels: true,
           currentIndex: _selectedIndex,
           elevation: 5),
 
@@ -84,7 +84,6 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-
                               SizedBox(height: 20,),
                               ListTile(
                                 title: Text("About DSC", style: TextStyle(color: Colors.black),),
@@ -109,7 +108,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                         ),
                       ));
 
-              showFoatingActionButton(true);
+              showFoatingActionButton(false);
 
               bottomSheetController.closed.then((value) {
                 showFoatingActionButton(true);
