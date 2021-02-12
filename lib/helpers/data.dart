@@ -6,8 +6,8 @@ import 'package:http/http.dart' as http;
 class Data {
   List<TeamMember> teamMembers = List<TeamMember> ();
 
-  Future<void> getTeamData() async {
-    String url = "https://raw.githubusercontent.com/DSCVITBHOPAL/dscvitbhopal.github.io/master/data/team.json";
+  Future<void> getTeamData(String incomingUrl) async {
+    String url = incomingUrl;
 
     var response = await http.get(url);
     print(response);
