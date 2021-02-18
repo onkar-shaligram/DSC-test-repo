@@ -41,6 +41,7 @@ dependencies:
   shared_preferences: any
   http: any
   cached_network_image: any
+  flutter_spinkit: any
 
 dev_dependencies:
   flutter_test:

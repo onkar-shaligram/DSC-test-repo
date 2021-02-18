@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dsc_local/screens/Medium%20Page/articleClass.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -43,7 +42,6 @@ class ArticleTile extends StatelessWidget {
                   color: Colors.transparent,
                   height: 100,
                   width: MediaQuery.of(context).size.width,
-                  alignment: Alignment.center,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -64,19 +62,6 @@ class ArticleTile extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Container(
-                //   color: Colors.black45,
-                //   height: 100,
-                //   width: 120,
-                //   alignment: Alignment.center,
-                //   child: Text(
-                //     author,
-                //     style: TextStyle(
-                //         fontSize: 13,
-                //         color: Colors.white,
-                //         fontWeight: FontWeight.w500),
-                //   ),
-                // ),
               ],
             ),
           ),
