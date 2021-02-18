@@ -42,6 +42,8 @@ dependencies:
   http: any
   cached_network_image: any
   flutter_spinkit: any
+  firebase_messaging: ^7.0.3
+  flutter_local_notifications: any
 
 dev_dependencies:
   flutter_test:
