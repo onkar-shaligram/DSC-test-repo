@@ -23,7 +23,8 @@ class _DesignTeamState extends State<DesignTeam> {
 
   getTeamData() async {
     await data.getTeamData(
-        "https://raw.githubusercontent.com/DSCVITBHOPAL/dscvitbhopal.github.io/master/data/team/design-team.json");
+        "https://raw.githubusercontent.com/DSCVITBHOPAL/dscvitbhopal.github.io/master/data/team/design-team.json"
+    );
     teamMembers = data.teamMembers;
     setState(() {});
   }
@@ -59,7 +60,8 @@ class _DesignTeamState extends State<DesignTeam> {
                           profile: teamMembers[index].profile,
                         );
                       }),
-                ))
+                )
+            )
           ],
         ),
       ),

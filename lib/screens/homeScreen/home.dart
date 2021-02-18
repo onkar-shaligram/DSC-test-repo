@@ -1,3 +1,4 @@
+import 'package:dsc_local/screens/Medium%20Page/ArticlesPage.dart';
 import 'package:dsc_local/screens/dscScreen/aboutDSC.dart';
 import 'package:dsc_local/screens/dscScreen/requestEvent.dart';
 import 'package:dsc_local/screens/dscScreen/team.dart';
@@ -45,11 +46,8 @@ class _HomeState extends State<Home> {
           showUnselectedLabels: true,
           currentIndex: _selectedIndex,
           elevation: 5),
-
-
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: MyFloatingActionButton(),
-
       body: Center(
         child: tabs.elementAt(_selectedIndex),
       ),
@@ -72,7 +70,7 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
             backgroundColor: Colors.white70,
             onPressed: () {
               var bottomSheetController = showBottomSheet(
-                backgroundColor: Colors.transparent,
+                  backgroundColor: Colors.transparent,
                   context: context,
                   builder: (context) => ClipRRect(
                         borderRadius: BorderRadius.only(
@@ -80,29 +78,57 @@ class _MyFloatingActionButtonState extends State<MyFloatingActionButton> {
                             topRight: Radius.circular(50)),
                         child: Container(
                           color: Colors.white,
-                          height: MediaQuery.of(context).size.height-300,
+                          height: MediaQuery.of(context).size.height - 300,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(height: 20,),
+                              SizedBox(
+                                height: 20,
+                              ),
                               ListTile(
-                                title: Text("About DSC", style: TextStyle(color: Colors.black),),
+                                title: Text(
+                                  "About DSC",
+                                  style: TextStyle(color: Colors.black),
+                                ),
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => AboutDSC()));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AboutDSC()));
                                 },
                               ),
                               ListTile(
-                                title: Text("Team Members", style: TextStyle(color: Colors.black)),
+                                title: Text("Team Members",
+                                    style: TextStyle(color: Colors.black)),
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Team()));                                  
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Team()));
                                 },
                               ),
                               ListTile(
-                                title: Text("Request an Event", style: TextStyle(color: Colors.black)),
+                                title: Text("Request an Event",
+                                    style: TextStyle(color: Colors.black)),
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => RequestEventForm()));                                  
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              RequestEventForm()));
                                 },
-                              )
+                              ),
+                              ListTile(
+                                title: Text("Medium Articles",
+                                    style: TextStyle(color: Colors.black)),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ArticlesPage()));
+                                },
+                              ),
                             ],
                           ),
                         ),

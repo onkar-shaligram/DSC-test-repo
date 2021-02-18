@@ -39,6 +39,8 @@ dependencies:
   curved_navigation_bar: any
   ss_bottom_navbar: any
   shared_preferences: any
+  http: any
+  cached_network_image: any
 
 dev_dependencies:
   flutter_test:
